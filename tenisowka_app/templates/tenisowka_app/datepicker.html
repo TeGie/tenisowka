@@ -1,0 +1,21 @@
+{% extends 'tenisowka_app/form_template.html' %}
+
+{% load staticfiles %}
+
+{% block form_title %}{% endblock %}
+
+{% block form_css %}
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+{% block form_script %}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="{% static 'tenisowka_app/datepicker.js' %}"></script>
+{% block pojedynek_script %}{% endblock %}
+{% endblock %}
+
+{% block form_header %}{% endblock %}
+
+{% block button %}{% endblock %}

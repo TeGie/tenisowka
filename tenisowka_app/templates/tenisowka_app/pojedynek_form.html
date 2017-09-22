@@ -1,0 +1,13 @@
+{% extends 'tenisowka_app/datepicker.html' %}
+
+{% load staticfiles %}
+
+{% block form_title %}Dodaj pojedynek{% endblock %}
+
+{% block pojedynek_script %}
+    <script src="{% static 'tenisowka_app/pojedynek.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block form_header %}Dodaj pojedynek{% endblock %}
+
+{% block button %}Dodaj{% endblock %}

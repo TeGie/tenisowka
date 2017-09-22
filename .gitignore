@@ -1,0 +1,14 @@
+workspace.xml
+tasks.xml
+
+/static/
+
+*.pyc
+
+/Tenisowka/secret_settings.py
+
+/tenisowka_app/static/tenisowka_app/fullcalendar.css
+/tenisowka_app/static/tenisowka_app/fullcalendar.js
+/tenisowka_app/static/tenisowka_app/jquery-3.2.1.min.js
+/tenisowka_app/static/tenisowka_app/locale-all.js
+/tenisowka_app/static/tenisowka_app/moment.min.js

@@ -1,0 +1,63 @@
+{% extends 'tenisowka_app/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Strona główna{% endblock title %}
+
+{% block css %}
+    <link href="{% static 'tenisowka_app/fullcalendar.css' %}" type="text/css" rel="stylesheet">
+    <link href="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'tenisowka_app/moment.min.js' %}"></script>
+    <script src="{% static 'tenisowka_app/fullcalendar.js' %}"></script>
+    <script src="{% static 'tenisowka_app/locale-all.js' %}"></script>
+    <script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,listMonth'
+                    },
+                    aspectRatio: 2,
+                    fixedWeekCount: false,
+                    locale: 'pl',
+                    displayEventEnd: true,
+                    eventLimit: true,
+                    events: [
+                        {% for i in events %}
+                        {
+                            title: '{{ i.nazwa }}',
+                            start: '{{ i.start|date:"c" }}',
+                            end: '{{ i.koniec|date:"c" }}',
+                            description: '{{ i.opis }}',
+                        },
+                        {% endfor %}
+                    ],
+                    eventRender: function(event, element) {
+                        element.qtip({
+                            content: event.description,
+                            style: {
+                                classes: 'qtip-bootstrap'
+                            },
+                            position: {
+                                my: 'bottom center',
+                                at: 'top center',
+                            }
+                        });
+                    }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div id='calendar'></div>
+        </div>
+    </div>
+{% endblock %}
