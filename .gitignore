@@ -12,3 +12,5 @@ tasks.xml
 /tenisowka_app/static/tenisowka_app/jquery-3.2.1.min.js
 /tenisowka_app/static/tenisowka_app/locale-all.js
 /tenisowka_app/static/tenisowka_app/moment.min.js
+/tenisowka_app/static/tenisowka_app/jquery-ui-timepicker-addon.css
+/tenisowka_app/static/tenisowka_app/jquery-ui-timepicker-addon.js
