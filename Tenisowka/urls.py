@@ -31,5 +31,7 @@ urlpatterns = [
     url(r'^pojedynki/$', Pojedynki.as_view(), name='pojedynki'),
     url(r'^pojedynek/(?P<pk>[0-9]+)/$', ZobaczPojedynek.as_view()),
     url(r'^index/$', wydarzenia, name='index'),
-    url(r'^wydarzenie/dodaj/$', DodajWydarzenie.as_view(), name='dodaj_wydarzenie')
+    url(r'^wydarzenie/dodaj/$', DodajWydarzenie.as_view(), name='dodaj_wydarzenie'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', AktualizujWydarzenie.as_view(), name='aktualizuj_wydarzenie'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', UsunWydarzenie.as_view(), name='usun_wydarzenie')
 ]

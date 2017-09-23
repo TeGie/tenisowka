@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.contrib.auth.decorators import login_required
 
 
+########## Index #########
 @login_required(login_url='/login/')
 def wydarzenia(request):
     all_events = Wydarzenie.objects.all()
@@ -30,6 +31,7 @@ def wydarzenia(request):
     return render(request, 'tenisowka_app/glowna.html', context)
 
 
+########## Zawodnicy #########
 class Zawodnicy(LoginRequiredMixin, ListView):
     model = Zawodnik
     login_url = '/login/'
@@ -60,14 +62,7 @@ class UsunZawodnika(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('zawodnicy')
     login_url = '/login/'
 
-
-class DodajPojedynek(LoginRequiredMixin, CreateView):
-    model = Pojedynek
-    success_url = reverse_lazy('pojedynki')
-    form_class = DodajPojedynekForm
-    login_url = '/login/'
-
-
+########## Pojedynki #########
 class Pojedynki(LoginRequiredMixin, ListView):
     model = Pojedynek
     login_url = '/login/'
@@ -77,8 +72,45 @@ class ZobaczPojedynek(LoginRequiredMixin, DetailView):
     model = Pojedynek
     login_url = '/login/'
 
+
+class DodajPojedynek(LoginRequiredMixin, CreateView):
+    model = Pojedynek
+    success_url = reverse_lazy('pojedynki')
+    form_class = DodajPojedynekForm
+    login_url = '/login/'
+
+
+class AktualizujPojedynek(LoginRequiredMixin, UpdateView):
+    model = Wydarzenie
+    fields = '__all__'
+    success_url = reverse_lazy('pojedynki')
+    template_name_suffix = '_update_form'
+    login_url = '/login/'
+
+
+class UsunPojedynek(LoginRequiredMixin, DeleteView):
+    model = Wydarzenie
+    success_url = reverse_lazy('pojedynki')
+    login_url = '/login/'
+
+
+########## Wydarzenia #########
 class DodajWydarzenie(LoginRequiredMixin, CreateView):
     model = Wydarzenie
     fields = '__all__'
+    success_url = reverse_lazy('index')
+    login_url = '/login/'
+
+
+class AktualizujWydarzenie(LoginRequiredMixin, UpdateView):
+    model = Wydarzenie
+    fields = '__all__'
+    success_url = reverse_lazy('index')
+    template_name_suffix = '_update_form'
+    login_url = '/login/'
+
+
+class UsunWydarzenie(LoginRequiredMixin, DeleteView):
+    model = Wydarzenie
     success_url = reverse_lazy('index')
     login_url = '/login/'

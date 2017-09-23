@@ -2,8 +2,6 @@
 
 {% load staticfiles %}
 
-{% block form_title %}{% endblock %}
-
 {% block form_css %}
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'tenisowka_app/css/jquery-ui-timepicker-addon.css' %}">
@@ -17,7 +15,3 @@
     <script src="{% static 'tenisowka_app/js/datepicker.js' %}"></script>
 {% block pojedynek_script %}{% endblock %}
 {% endblock %}
-
-{% block form_header %}{% endblock %}
-
-{% block button %}{% endblock %}

@@ -34,6 +34,7 @@
                             start: '{{ i.start|date:"c" }}',
                             end: '{{ i.koniec|date:"c" }}',
                             description: '{{ i.opis }}',
+                            url: '{% url 'aktualizuj_wydarzenie' i.pk %}',
                         },
                         {% endfor %}
                     ],
@@ -48,6 +49,11 @@
                                 at: 'top center',
                             }
                         });
+                    },
+                    eventClick: function(event) {
+                        if (event.url) {
+                            window.open(event.url, _self);
+                        }
                     }
             });
         });

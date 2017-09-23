@@ -10,6 +10,7 @@
 
 {% block script %}
 {% block form_script %}{% endblock %}
+{% block form_confirm_delete_script %}{% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -32,10 +33,11 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" class="btn btn-success">
-                                            {% block button %}{% endblock %}</button>
+                                            {% block form_button %}{% endblock %}</button>
                                     </div>
                                 </div>
                             </form>
+                            {% block form_delete %}{% endblock %}
                         </div>
                     </div>
                 </div>
