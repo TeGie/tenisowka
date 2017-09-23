@@ -7,10 +7,10 @@ tasks.xml
 
 /Tenisowka/secret_settings.py
 
-/tenisowka_app/static/tenisowka_app/fullcalendar.css
-/tenisowka_app/static/tenisowka_app/fullcalendar.js
-/tenisowka_app/static/tenisowka_app/jquery-3.2.1.min.js
-/tenisowka_app/static/tenisowka_app/locale-all.js
-/tenisowka_app/static/tenisowka_app/moment.min.js
-/tenisowka_app/static/tenisowka_app/jquery-ui-timepicker-addon.css
-/tenisowka_app/static/tenisowka_app/jquery-ui-timepicker-addon.js
+/tenisowka_app/static/tenisowka_app/css/fullcalendar.css
+/tenisowka_app/static/tenisowka_app/js/fullcalendar.js
+/tenisowka_app/static/tenisowka_app/js/jquery-3.2.1.min.js
+/tenisowka_app/static/tenisowka_app/js/locale-all.js
+/tenisowka_app/static/tenisowka_app/js/moment.min.js
+/tenisowka_app/static/tenisowka_app/css/jquery-ui-timepicker-addon.css
+/tenisowka_app/static/tenisowka_app/js/jquery-ui-timepicker-addon.js
