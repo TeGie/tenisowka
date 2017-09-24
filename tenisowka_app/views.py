@@ -95,6 +95,11 @@ class UsunPojedynek(LoginRequiredMixin, DeleteView):
 
 
 ########## Wydarzenia #########
+class ZobaczWydarzenie(LoginRequiredMixin, DetailView):
+    model = Wydarzenie
+    login_url = '/login/'
+
+
 class DodajWydarzenie(LoginRequiredMixin, CreateView):
     model = Wydarzenie
     fields = '__all__'

@@ -34,7 +34,7 @@
                             start: '{{ i.start|date:"c" }}',
                             end: '{{ i.koniec|date:"c" }}',
                             description: '{{ i.opis }}',
-                            url: '{% url 'aktualizuj_wydarzenie' i.pk %}',
+                            url: '{% url 'zobacz_wydarzenie' i.id %}',
                         },
                         {% endfor %}
                     ],
@@ -52,8 +52,11 @@
                     },
                     eventClick: function(event) {
                         if (event.url) {
-                            window.open(event.url, _self);
+                            document.location.href = event.url;
                         }
+                    },
+                    dayClick: function( date, jsEvent , view ) {
+                        document.location.href = '{% url 'dodaj_wydarzenie' %}';
                     }
             });
         });
