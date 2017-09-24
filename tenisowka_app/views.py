@@ -4,7 +4,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from tenisowka_app.forms import *
 from django.shortcuts import render, redirect
-from .models import Wydarzenie
 from django.http import HttpResponse
 import json
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin

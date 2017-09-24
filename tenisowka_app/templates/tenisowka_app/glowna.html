@@ -10,55 +10,59 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'tenisowka_app/js/moment.min.js' %}"></script>
-    <script src="{% static 'tenisowka_app/js/fullcalendar.js' %}"></script>
-    <script src="{% static 'tenisowka_app/js/locale-all.js' %}"></script>
-    <script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
+    <script src="{% static 'tenisowka_app/js/moment.min.js' %}" defer></script>
+    <script src="{% static 'tenisowka_app/js/fullcalendar.js' %}" defer></script>
+    <script src="{% static 'tenisowka_app/js/locale-all.js' %}" defer></script>
+    <script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js" defer></script>
     <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,listMonth'
-                    },
-                    aspectRatio: 2,
-                    fixedWeekCount: false,
-                    locale: 'pl',
-                    displayEventEnd: true,
-                    eventLimit: true,
-                    events: [
-                        {% for i in events %}
-                        {
-                            title: '{{ i.nazwa }}',
-                            start: '{{ i.start|date:'c' }}',
-                            end: '{{ i.koniec|date:'c' }}',
-                            description: '{{ i.opis }}',
-                            url: '{% url 'zobacz_wydarzenie' i.id %}',
+        window.addEventListener('DOMContentLoaded', function() {
+            (function($) {
+                $(document).ready(function() {
+                    $('#calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,listMonth'
                         },
-                        {% endfor %}
-                    ],
-                    eventRender: function(event, element) {
-                        element.qtip({
-                            content: event.description,
-                            style: {
-                                classes: 'qtip-bootstrap'
+                        aspectRatio: 2,
+                        fixedWeekCount: false,
+                        locale: 'pl',
+                        displayEventEnd: true,
+                        eventLimit: true,
+                        events: [
+                            {% for i in events %}
+                            {
+                                title: '{{ i.nazwa }}',
+                                start: '{{ i.start|date:'c' }}',
+                                end: '{{ i.koniec|date:'c' }}',
+                                description: '{{ i.opis }}',
+                                url: '{% url 'zobacz_wydarzenie' i.id %}',
                             },
-                            position: {
-                                my: 'bottom center',
-                                at: 'top center',
+                            {% endfor %}
+                        ],
+                        eventRender: function(event, element) {
+                            element.qtip({
+                                content: event.description,
+                                style: {
+                                    classes: 'qtip-bootstrap'
+                                },
+                                position: {
+                                    my: 'bottom center',
+                                    at: 'top center',
+                                }
+                            });
+                        },
+                        eventClick: function(event) {
+                            if (event.url) {
+                                document.location.href = event.url;
                             }
-                        });
-                    },
-                    eventClick: function(event) {
-                        if (event.url) {
-                            document.location.href = event.url;
+                        },
+                        dayClick: function(date) {
+                            document.location.href = '/wydarzenie/dodaj/' + date.format('L');
                         }
-                    },
-                    dayClick: function( date, jsEvent , view ) {
-                        document.location.href = '/wydarzenie/dodaj/' + date.format('L');
-                    }
-            });
+                    });
+                });
+            })(jQuery);
         });
     </script>
 {% endblock %}
