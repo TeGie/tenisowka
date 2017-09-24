@@ -106,6 +106,12 @@ class DodajWydarzenie(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('index')
     login_url = '/login/'
 
+    def get_initial(self):
+        return {
+            'start': self.kwargs['start'],
+            'koniec': self.kwargs['start']
+        }
+
 
 class AktualizujWydarzenie(LoginRequiredMixin, UpdateView):
     model = Wydarzenie

@@ -9,6 +9,7 @@ $(function() {
     });
 
     $( "#id_start, #id_koniec" ).datetimepicker({
+        timeInput: true,
         changeYear: true,
         maxDate: '30',
         dayNamesMin: [ "Nd", "Pn", "Wt", "Śr", "Czw", "Pt", "So" ],
