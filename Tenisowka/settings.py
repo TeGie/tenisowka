@@ -122,8 +122,9 @@ STATIC_ROOT = BASE_DIR + '/static/'
 LOGIN_URL = '/login/'
 
 LOGIN_EXEMPT_URLS = (
- # r'^about\.html$',
- # r'^legal/', # allow any URL under /legal/*
+    # r'^about\.html$',
+    # r'^legal/', # allow any URL under /legal/*
+    r'^register/',
 )
 
 LOGIN_REDIRECT_URL = 'index'

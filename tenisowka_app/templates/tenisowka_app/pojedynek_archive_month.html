@@ -10,13 +10,12 @@
             </li>
         {% endfor %}
     </ul>
-
     <p>
         {% if previous_month %}
-            Previous Month: <a href="{% url 'pojedynki' previous_month|date:'Y' previous_month|date:'m' %}"> {{ previous_month|date:"m / Y" }}</a>
+            Poprzedni miesiąc: <a href="{% url 'pojedynki' previous_month|date:'Y' previous_month|date:'m' %}"> {{ previous_month|date:"m / Y" }}</a>
         {% endif %}
         {% if next_month %}
-            Next Month: <a href="{% url 'pojedynki' next_month|date:'Y' next_month|date:'m' %}"> {{ next_month|date:"m / Y" }}</a>
+            Następny miesiąc: <a href="{% url 'pojedynki' next_month|date:'Y' next_month|date:'m' %}"> {{ next_month|date:"m / Y" }}</a>
         {% endif %}
     </p>
 {% endblock %}

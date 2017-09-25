@@ -6,14 +6,13 @@ from tenisowka_app.forms import *
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import json
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 from django.views.generic.dates import MonthArchiveView
 from django.http import Http404
 from django.utils.timezone import now
+from .models import *
 
 
-########## Index #########
+# Index #########
 def wydarzenia(request):
     all_events = Wydarzenie.objects.all()
     if request.GET:
@@ -32,7 +31,7 @@ def wydarzenia(request):
     return render(request, 'tenisowka_app/glowna.html', context)
 
 
-########## Zawodnicy #########
+# Zawodnicy #########
 class Zawodnicy(ListView):
     model = Zawodnik
 
@@ -47,7 +46,7 @@ class DodajZawodnika(CreateView):
     success_url = reverse_lazy('zawodnicy')
 
 
-class AktualizujZawodnika( UpdateView):
+class AktualizujZawodnika(UpdateView):
     model = Zawodnik
     fields = '__all__'
     success_url = reverse_lazy('zawodnicy')
@@ -59,7 +58,7 @@ class UsunZawodnika(DeleteView):
     success_url = reverse_lazy('zawodnicy')
 
 
-########## Pojedynki #########
+# Pojedynki #########
 class PojedynkiMonthArchiveView(MonthArchiveView):
     queryset = Pojedynek.objects.all()
     date_field = 'data'
@@ -104,8 +103,8 @@ class UsunPojedynek(DeleteView):
     success_url = reverse_lazy('pojedynki')
 
 
-########## Wydarzenia #########
-class ZobaczWydarzenie( DetailView):
+# Wydarzenia #########
+class ZobaczWydarzenie(DetailView):
     model = Wydarzenie
 
 
