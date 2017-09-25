@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'Tenisowka.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'Tenisowka.urls'
@@ -115,6 +116,16 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = BASE_DIR + '/static/'
+
+LOGIN_URL = '/login/'
+
+LOGIN_EXEMPT_URLS = (
+ # r'^about\.html$',
+ # r'^legal/', # allow any URL under /legal/*
+)
+
 LOGIN_REDIRECT_URL = 'index'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

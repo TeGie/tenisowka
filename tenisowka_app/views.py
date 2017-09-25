@@ -14,7 +14,6 @@ from django.utils.timezone import now
 
 
 ########## Index #########
-@login_required(login_url='/login/')
 def wydarzenia(request):
     all_events = Wydarzenie.objects.all()
     if request.GET:
@@ -34,35 +33,31 @@ def wydarzenia(request):
 
 
 ########## Zawodnicy #########
-class Zawodnicy(LoginRequiredMixin, ListView):
+class Zawodnicy(ListView):
     model = Zawodnik
-    login_url = '/login/'
 
 
-class ZobaczZawodnika(LoginRequiredMixin, DetailView):
+class ZobaczZawodnika(DetailView):
     model = Zawodnik
-    login_url = '/login/'
 
 
-class DodajZawodnika(LoginRequiredMixin, CreateView):
+class DodajZawodnika(CreateView):
     model = Zawodnik
     fields = '__all__'
     success_url = reverse_lazy('zawodnicy')
-    login_url = '/login/'
 
 
-class AktualizujZawodnika(LoginRequiredMixin, UpdateView):
+class AktualizujZawodnika( UpdateView):
     model = Zawodnik
     fields = '__all__'
     success_url = reverse_lazy('zawodnicy')
     template_name_suffix = '_update_form'
-    login_url = '/login/'
 
 
-class UsunZawodnika(LoginRequiredMixin, DeleteView):
+class UsunZawodnika(DeleteView):
     model = Zawodnik
     success_url = reverse_lazy('zawodnicy')
-    login_url = '/login/'
+
 
 ########## Pojedynki #########
 class PojedynkiMonthArchiveView(MonthArchiveView):
@@ -87,43 +82,37 @@ class PojedynkiMonthArchiveView(MonthArchiveView):
         return year
 
 
-class ZobaczPojedynek(LoginRequiredMixin, DetailView):
+class ZobaczPojedynek(DetailView):
     model = Pojedynek
-    login_url = '/login/'
 
 
-class DodajPojedynek(LoginRequiredMixin, CreateView):
+class DodajPojedynek(CreateView):
     model = Pojedynek
     success_url = reverse_lazy('pojedynki')
     form_class = DodajPojedynekForm
-    login_url = '/login/'
 
 
-class AktualizujPojedynek(LoginRequiredMixin, UpdateView):
+class AktualizujPojedynek(UpdateView):
     model = Wydarzenie
     fields = '__all__'
     success_url = reverse_lazy('pojedynki')
     template_name_suffix = '_update_form'
-    login_url = '/login/'
 
 
-class UsunPojedynek(LoginRequiredMixin, DeleteView):
+class UsunPojedynek(DeleteView):
     model = Wydarzenie
     success_url = reverse_lazy('pojedynki')
-    login_url = '/login/'
 
 
 ########## Wydarzenia #########
-class ZobaczWydarzenie(LoginRequiredMixin, DetailView):
+class ZobaczWydarzenie( DetailView):
     model = Wydarzenie
-    login_url = '/login/'
 
 
-class DodajWydarzenie(LoginRequiredMixin, CreateView):
+class DodajWydarzenie(CreateView):
     model = Wydarzenie
     fields = '__all__'
     success_url = reverse_lazy('index')
-    login_url = '/login/'
 
     def get_initial(self):
         return {
@@ -132,15 +121,13 @@ class DodajWydarzenie(LoginRequiredMixin, CreateView):
         }
 
 
-class AktualizujWydarzenie(LoginRequiredMixin, UpdateView):
+class AktualizujWydarzenie(UpdateView):
     model = Wydarzenie
     fields = '__all__'
     success_url = reverse_lazy('index')
     template_name_suffix = '_update_form'
-    login_url = '/login/'
 
 
-class UsunWydarzenie(LoginRequiredMixin, DeleteView):
+class UsunWydarzenie(DeleteView):
     model = Wydarzenie
     success_url = reverse_lazy('index')
-    login_url = '/login/'
