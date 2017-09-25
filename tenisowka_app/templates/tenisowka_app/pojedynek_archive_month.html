@@ -1,0 +1,22 @@
+{% extends 'tenisowka_app/base.html' %}
+
+{% block title %}Pojedynki{% endblock title %}
+
+{% block content %}
+    <ul>
+        {% for pojedynek in object_list %}
+            <li>{{ pojedynek.data|date:"d / m / Y" }}: {{ pojedynek.zawodnik_1.imie }} : {{ pojedynek.zawodnik_2.imie }}
+                | {{ pojedynek.wynik_zaw_1 }} : {{ pojedynek.wynik_zaw_2 }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        {% if previous_month %}
+            Previous Month: <a href="{% url 'pojedynki' previous_month|date:'Y' previous_month|date:'m' %}"> {{ previous_month|date:"m / Y" }}</a>
+        {% endif %}
+        {% if next_month %}
+            Next Month: <a href="{% url 'pojedynki' next_month|date:'Y' next_month|date:'m' %}"> {{ next_month|date:"m / Y" }}</a>
+        {% endif %}
+    </p>
+{% endblock %}

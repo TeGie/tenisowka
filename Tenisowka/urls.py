@@ -21,8 +21,10 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     # admin, login, register, etc
     url(r'^admin/', admin.site.urls),
+
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
+
     url(r'^password_reset/$', auth_views.password_reset,
         {'template_name':'registration/password_reset.html'},
         name='password_reset'),
@@ -38,18 +40,25 @@ urlpatterns = [
 
     # site nav
     url(r'^index/$', wydarzenia, name='index'),
+
     url(r'^zawodnicy/$', Zawodnicy.as_view(), name='zawodnicy'),
     url(r'^zawodnik/(?P<pk>[0-9]+)/$', ZobaczZawodnika.as_view(), name='zawodnik'),
     url(r'^zawodnik/dodaj/$', DodajZawodnika.as_view(),name='dodaj_zawodnika'),
     url(r'^zawodnik/(?P<pk>[0-9]+)/aktualizuj/$', AktualizujZawodnika.as_view(),name='aktualizuj_zawodnika'),
     url(r'^zawodnik/(?P<pk>[0-9]+)/usun/$', UsunZawodnika.as_view(),name='usun_zawodnika'),
+
     url(r'^pojedynek/dodaj/$', DodajPojedynek.as_view(),name='dodaj_pojedynek'),
-    url(r'^pojedynki/$', Pojedynki.as_view(), name='pojedynki'),
     url(r'^pojedynek/(?P<pk>[0-9]+)/$', ZobaczPojedynek.as_view()),
     url(r'^wydarzenie/dodaj/(?P<start>((0|1)\d{1})/((0|1|2)\d{1})/((19|20)\d{2}))/$',
         DodajWydarzenie.as_view(),
         name='dodaj_wydarzenie'),
+
     url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', AktualizujWydarzenie.as_view(), name='aktualizuj_wydarzenie'),
     url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', UsunWydarzenie.as_view(), name='usun_wydarzenie'),
-    url(r'^wydarzenie/(?P<pk>[0-9]+)/$', ZobaczWydarzenie.as_view(), name='zobacz_wydarzenie')
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/$', ZobaczWydarzenie.as_view(), name='zobacz_wydarzenie'),
+
+    url(r'^pojedynki/$', PojedynkiMonthArchiveView.as_view(), name='pojedynki'),
+    url(r'^pojedynki/(?P<year>[0-9]{4})/(?P<month>[0-9]+)/$',
+        PojedynkiMonthArchiveView.as_view(),
+        name="pojedynki"),
 ]

@@ -8,6 +8,9 @@ from django.http import HttpResponse
 import json
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.views.generic.dates import MonthArchiveView
+from django.http import Http404
+from django.utils.timezone import now
 
 
 ########## Index #########
@@ -62,9 +65,26 @@ class UsunZawodnika(LoginRequiredMixin, DeleteView):
     login_url = '/login/'
 
 ########## Pojedynki #########
-class Pojedynki(LoginRequiredMixin, ListView):
-    model = Pojedynek
-    login_url = '/login/'
+class PojedynkiMonthArchiveView(MonthArchiveView):
+    queryset = Pojedynek.objects.all()
+    date_field = 'data'
+    allow_future = True
+    month_format = '%m'
+    year_format = '%Y'
+
+    def get_month(self):
+        try:
+            month = super(PojedynkiMonthArchiveView, self).get_month()
+        except Http404:
+            month = now().strftime(self.get_month_format())
+        return month
+
+    def get_year(self):
+        try:
+            year = super(PojedynkiMonthArchiveView, self).get_year()
+        except Http404:
+            year = now().strftime(self.get_year_format())
+        return year
 
 
 class ZobaczPojedynek(LoginRequiredMixin, DetailView):
