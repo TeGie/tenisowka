@@ -48,6 +48,12 @@ urlpatterns = [
 
     # site nav
     url(r'^index/$', wydarzenia, name='index'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', AktualizujWydarzenie.as_view(), name='aktualizuj_wydarzenie'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', UsunWydarzenie.as_view(), name='usun_wydarzenie'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/$', ZobaczWydarzenie.as_view(), name='zobacz_wydarzenie'),
+    url(r'^wydarzenie/dodaj/(?P<start>((0|1)\d{1})/((0|1|2)\d{1})/((19|20)\d{2}))/$',
+        DodajWydarzenie.as_view(),
+        name='dodaj_wydarzenie'),
 
     url(r'^zawodnicy/$', Zawodnicy.as_view(), name='zawodnicy'),
     url(r'^zawodnik/(?P<pk>[0-9]+)/$', ZobaczZawodnika.as_view(), name='zawodnik'),
@@ -57,14 +63,6 @@ urlpatterns = [
 
     url(r'^pojedynek/dodaj/$', DodajPojedynek.as_view(),name='dodaj_pojedynek'),
     url(r'^pojedynek/(?P<pk>[0-9]+)/$', ZobaczPojedynek.as_view()),
-    url(r'^wydarzenie/dodaj/(?P<start>((0|1)\d{1})/((0|1|2)\d{1})/((19|20)\d{2}))/$',
-        DodajWydarzenie.as_view(),
-        name='dodaj_wydarzenie'),
-
-    url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', AktualizujWydarzenie.as_view(), name='aktualizuj_wydarzenie'),
-    url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', UsunWydarzenie.as_view(), name='usun_wydarzenie'),
-    url(r'^wydarzenie/(?P<pk>[0-9]+)/$', ZobaczWydarzenie.as_view(), name='zobacz_wydarzenie'),
-
     url(r'^pojedynki/$', PojedynkiMonthArchiveView.as_view(), name='pojedynki'),
     url(r'^pojedynki/(?P<year>[0-9]{4})/(?P<month>[0-9]+)/$',
         PojedynkiMonthArchiveView.as_view(),
