@@ -51,7 +51,7 @@ urlpatterns = [
     url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', AktualizujWydarzenie.as_view(), name='aktualizuj_wydarzenie'),
     url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', UsunWydarzenie.as_view(), name='usun_wydarzenie'),
     url(r'^wydarzenie/(?P<pk>[0-9]+)/$', ZobaczWydarzenie.as_view(), name='zobacz_wydarzenie'),
-    url(r'^wydarzenie/dodaj/(?P<start>((0|1)\d{1})/((0|1|2)\d{1})/((19|20)\d{2}))/$',
+    url(r'^wydarzenie/dodaj/(?P<start>(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2})/$',
         DodajWydarzenie.as_view(),
         name='dodaj_wydarzenie'),
 
