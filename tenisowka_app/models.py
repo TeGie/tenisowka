@@ -9,10 +9,11 @@ __all__ = ('Zawodnik', 'Pojedynek', 'Wydarzenie')
 
 class Zawodnik(models.Model):
     imie = models.CharField(max_length=128, verbose_name='Imię i nazwisko')
-    data_urodzenia = models.DateField(null=True)
-    adres = models.CharField(max_length=128)
-    data_badania = models.DateField(null=True)
-    nr_licencji = models.IntegerField(null=True)
+    data_urodzenia = models.DateField(null=True, blank=True)
+    adres = models.CharField(max_length=128, blank=True)
+    data_badania = models.DateField(null=True, blank=True)
+    nr_licencji = models.IntegerField(null=True, blank=True)
+    # elo_rating = models.IntegerField(default=1200)
 
     class Meta:
         verbose_name = 'Zawodnik'
@@ -27,23 +28,23 @@ class Zawodnik(models.Model):
         return {'czas': czas}
 
     def performance(self):
-        wynik_1, wynik_2, win_arr, loss_arr, success_arr, failure_arr = 0, 0, [], [], [], []
+        wins_1, wins_2, win_arr, loss_arr = 0, 0, [], []
         pojedynek_1 = self.zawodnik_1.all()
         pojedynek_2 = self.zawodnik_2.all()
         if pojedynek_1 or pojedynek_2:
             for p in pojedynek_1:
-                    if p.wynik_zaw_1 == 3:
-                        wynik_1 += 1
-                        win_arr.append(p.zawodnik_2.imie)
-                    else:
-                        loss_arr.append(p.zawodnik_2.imie)
+                if p.wynik_zaw_1 == 3:
+                    wins_1 += 1
+                    win_arr.append(p.zawodnik_2.imie)
+                else:
+                    loss_arr.append(p.zawodnik_2.imie)
             for p in pojedynek_2:
                 if p.wynik_zaw_2 == 3:
-                    wynik_2 += 1
+                    wins_2 += 1
                     win_arr.append(p.zawodnik_1.imie)
                 else:
                     loss_arr.append(p.zawodnik_1.imie)
-            success = (round((wynik_1 + wynik_2) / (len(pojedynek_1) + len(pojedynek_2)) * 100, 2))
+            success = (round((wins_1 + wins_2) / (len(pojedynek_1) + len(pojedynek_2)) * 100, 2))
             failure = 100 - success
         else:
             success = 'Brak pojedynków'
@@ -82,10 +83,10 @@ class Pojedynek(models.Model):
 
 
 class Wydarzenie(models.Model):
-    nazwa = models.CharField(max_length=255, null=True, blank=True)
-    opis = models.TextField(null=True)
-    start = models.DateTimeField(null=True, blank=True)
-    koniec = models.DateTimeField(null=True, blank=True)
+    nazwa = models.CharField(max_length=255, null=True)
+    opis = models.TextField(blank=True, null=True)
+    start = models.DateTimeField(null=True)
+    koniec = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name = 'Wydarzenie'
