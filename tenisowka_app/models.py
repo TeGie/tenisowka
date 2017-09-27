@@ -13,7 +13,7 @@ class Zawodnik(models.Model):
     adres = models.CharField(max_length=128, blank=True)
     data_badania = models.DateField(null=True, blank=True)
     nr_licencji = models.IntegerField(null=True, blank=True)
-    # elo_rating = models.IntegerField(default=1200)
+    elo_rating = models.IntegerField(default=1200)
 
     class Meta:
         verbose_name = 'Zawodnik'
@@ -80,6 +80,29 @@ class Pojedynek(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format(self.zawodnik_1, self.zawodnik_2, self.data)
+
+
+    def save(self,*args,**kwargs):
+        try:
+            zawodnik_1 = Zawodnik.objects.get(pk=self.zawodnik_1.pk)
+            zawodnik_2 = Zawodnik.objects.get(pk=self.zawodnik_2.pk)
+            rating_1 = zawodnik_1.elo_rating
+            rating_2 = zawodnik_2.elo_rating
+            expected_1 = 1 / (1 + 10 ** ((rating_2 - rating_1) / 400))
+            expected_2 = 1 / (1 + 10 ** ((rating_1 - rating_2) / 400))
+            if self.wynik_zaw_1 == 3:
+                new_zawodnik_1_elo = zawodnik_1.elo_rating + 32 * (1 - expected_1)
+                new_zawodnik_2_elo = zawodnik_2.elo_rating + 32 * (0 - expected_2)
+            else:
+                new_zawodnik_1_elo = zawodnik_1.elo_rating + 32 * (0 - expected_2)
+                new_zawodnik_2_elo = zawodnik_2.elo_rating + 32 * (1 - expected_1)
+            zawodnik_1.elo_rating = new_zawodnik_1_elo
+            zawodnik_2.elo_rating = new_zawodnik_2_elo
+            zawodnik_1.save()
+            zawodnik_2.save()
+        except Exception as e:
+            print(e)
+        super(Pojedynek, self).save(*args, **kwargs)
 
 
 class Wydarzenie(models.Model):
