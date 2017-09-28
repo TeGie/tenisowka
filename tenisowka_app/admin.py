@@ -4,6 +4,6 @@ from tenisowka_app.models import *
 
 # admin.site.register(Zawodnik, Pojedynek, Wydarzenie)
 
-@admin.register(Zawodnik, Pojedynek, Wydarzenie)
-class TrenerAdmin(admin.ModelAdmin):
+@admin.register(Player, Match, Event)
+class CoachAdmin(admin.ModelAdmin):
     pass

@@ -30,13 +30,13 @@
                         displayEventEnd: true,
                         eventLimit: true,
                         events: [
-                            {% for i in events %}
+                            {% for event in events %}
                             {
-                                title: '{{ i.nazwa }}',
-                                start: '{{ i.start|date:'c' }}',
-                                end: '{{ i.koniec|date:'c' }}',
-                                description: '{{ i.opis }}',
-                                url: '{% url 'zobacz_wydarzenie' i.id %}',
+                                title: '{{ event.name }}',
+                                start: '{{ event.start|date:'c' }}',
+                                end: '{{ event.end|date:'c' }}',
+                                description: '{{ event.description }}',
+                                url: '{% url 'event' event.id %}',
                             },
                             {% endfor %}
                         ],

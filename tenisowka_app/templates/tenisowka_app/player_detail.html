@@ -1,0 +1,61 @@
+{% extends 'tenisowka_app/base.html' %}
+
+{% block title %}Widok zawodnika{% endblock title %}
+
+{% block content %}
+    <h4>Imię i nazwisko</h4>
+    <p>{{ player.name }}</p>
+
+    <h4>Data urodzenia</h4>
+    <p>{{ player.birth_date }}</p>
+
+    <h4>Adres</h4>
+    <p>{{ player.adress }}</p>
+
+    <h4>Data badania</h4>
+    <p>{{ player.med_check_date }}</p>
+
+    <h4>Od ostaniego badania minęło:</h4>
+    <p>
+        {{ player.med_check.med_check_span.years }} lat
+        {{ player.med_check.med_check_span.months }} miesiecy
+        {{ player.med_check.med_check_span.days }} dni
+    </p>
+
+    <h4>Numer licencji</h4>
+    <p>{{ player.licence_number }}</p>
+
+    <h4>Zwycięstwa</h4>
+    <p>{{ player.performance.success_rate }}</p>
+
+    <h4>Pregrane</h4>
+    <p>{{ player.performance.failure_rate }}</p>
+
+    <h4>Wygrał(a) z:</h4>
+        {% for rival, count in player.performance.defeated %}
+            <p>{{ rival }} : {{ count }}</p>
+        {% empty %}
+            <p>Brak przeciwników</p>
+        {% endfor %}
+
+    <h4>Przegrał(a) z:</h4>
+        {% for rival, count in player.performance.defeated_by %}
+            <p>{{ rival }} : {{ count }}</p>
+        {% empty %}
+            <p>Brak przeciwników</p>
+        {% endfor %}
+{% endblock content %}
+
+
+
+
+<!--<div class="progress">-->
+  <!--<div class="progress-bar progress-bar-success" role="progressbar" style="width:{{ success }}%">-->
+    <!--Wygranych {{ success }}%-->
+  <!--</div>-->
+  <!--<div class="progress-bar progress-bar-danger" role="progressbar" style="width:{{ failure }}%">-->
+    <!--Przegranych {{ failure }}%-->
+  <!--</div>-->
+<!--</div>-->
+
+

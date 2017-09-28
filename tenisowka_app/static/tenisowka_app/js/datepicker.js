@@ -1,5 +1,5 @@
 $(function() {
-    $( "#id_data_badania, #id_data_urodzenia, #id_data" ).datepicker({
+    $( "#id_med_check_date, #id_birth_date, #id_date" ).datepicker({
         changeYear: true,
         maxDate: '30',
         dayNamesMin: [ "Nd", "Pn", "Wt", "Śr", "Czw", "Pt", "So" ],
@@ -8,7 +8,7 @@ $(function() {
         "Listopad", "Grudzień" ],
     });
 
-    $( "#id_start, #id_koniec" ).datetimepicker({
+    $( "#id_start, #id_end" ).datetimepicker({
         timeInput: true,
         changeYear: true,
         maxDate: '30',

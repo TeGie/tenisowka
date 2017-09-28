@@ -10,8 +10,7 @@
 {% block form_script %}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-            crossorigin="anonymous"></script>
-    <script src="{% static 'tenisowka_app/js/jquery-ui-timepicker-addon.js' %}"></script>
-    <script src="{% static 'tenisowka_app/js/datepicker.js' %}"></script>
-{% block pojedynek_script %}{% endblock %}
+            crossorigin="anonymous" defer></script>
+    <script src="{% static 'tenisowka_app/js/jquery-ui-timepicker-addon.js' %}" defer></script>
+    <script src="{% static 'tenisowka_app/js/datepicker.js' %}" defer></script>
 {% endblock %}
