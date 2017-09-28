@@ -2,7 +2,7 @@ from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-# from tenisowka_app.forms import *
+from .forms import *
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
@@ -87,16 +87,15 @@ class MatchDetails(DetailView):
 
 class AddMatch(CreateView):
     model = Match
-    fields = '__all__'
+    form_class = MatchForm
     success_url = reverse_lazy('matches')
-    # form_class = AddMatchForm
 
 
 class UpdateMatch(UpdateView):
     model = Match
-    fields = '__all__'
-    success_url = reverse_lazy('matches')
     template_name_suffix = '_update_form'
+    form_class = MatchForm
+    success_url = reverse_lazy('matches')
 
 
 class DeleteMatch(DeleteView):

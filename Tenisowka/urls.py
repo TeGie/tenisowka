@@ -48,12 +48,12 @@ urlpatterns = [
 
     # site nav
     url(r'^index/$', events, name='index'),
-    url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', UpdateEvent.as_view(), name='update_event'),
-    url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', DeleteEvent.as_view(), name='delete_event'),
     url(r'^wydarzenie/(?P<pk>[0-9]+)/$', EventDetails.as_view(), name='event'),
     url(r'^wydarzenie/dodaj/(?P<start>(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2})/$',
         AddEvent.as_view(),
         name='add_event'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', UpdateEvent.as_view(), name='update_event'),
+    url(r'^wydarzenie/(?P<pk>[0-9]+)/usun/$', DeleteEvent.as_view(), name='delete_event'),
 
     url(r'^zawodnicy/$', Players.as_view(), name='players'),
     url(r'^zawodnik/(?P<pk>[0-9]+)/$', PlayerDetails.as_view(), name='player'),
@@ -61,10 +61,11 @@ urlpatterns = [
     url(r'^zawodnik/(?P<pk>[0-9]+)/aktualizuj/$', UpdatePlayer.as_view(), name='update_player'),
     url(r'^zawodnik/(?P<pk>[0-9]+)/usun/$', DeletePlayer.as_view(), name='delete_player'),
 
-    url(r'^pojedynek/dodaj/$', AddMatch.as_view(), name='add_match'),
-    url(r'^pojedynek/(?P<pk>[0-9]+)/$', MatchDetails.as_view(), name='match'),
     url(r'^pojedynki/$', MatchesMonthArchiveView.as_view(), name='matches'),
     url(r'^pojedynki/(?P<year>[0-9]{4})/(?P<month>[0-9]+)/$',
         MatchesMonthArchiveView.as_view(),
         name="matches"),
+    url(r'^pojedynek/(?P<pk>[0-9]+)/$', MatchDetails.as_view(), name='match'),
+    url(r'^pojedynek/dodaj/$', AddMatch.as_view(), name='add_match'),
+    url(r'^pojedynek/(?P<pk>[0-9]+)/aktualizuj/$', UpdateMatch.as_view(), name='update_match'),
 ]
