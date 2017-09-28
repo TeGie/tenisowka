@@ -13,7 +13,7 @@ class Player(models.Model):
     adress = models.CharField(max_length=128, blank=True, verbose_name='adres')
     med_check_date = models.DateField(null=True, blank=True, verbose_name='data badania')
     licence_number = models.IntegerField(null=True, blank=True, verbose_name='nr licencji')
-    elo_rating = models.IntegerField(default=1200)
+    elo_rating = models.SmallIntegerField(default=1200)
 
     class Meta:
         verbose_name = 'Zawodnik'
@@ -59,6 +59,7 @@ class Player(models.Model):
 
 class Match(models.Model):
     RESULT = (
+        (0, '0'),
         (1, '1'),
         (2, '2'),
         (3, '3'),
@@ -67,6 +68,7 @@ class Match(models.Model):
     player_2 = models.ForeignKey('Player', related_name='player_2', null=True, verbose_name='zawodnik 2')
     player_1_result = models.PositiveSmallIntegerField(choices=RESULT, default=0, verbose_name='wynik zawodnika 1')
     player_2_result = models.PositiveSmallIntegerField(choices=RESULT, default=0, verbose_name='wynik zawodnika 2')
+    description = models.TextField(blank=True, null=True, verbose_name='opis')
     date = models.DateField(verbose_name='data')
 
     class Meta:
