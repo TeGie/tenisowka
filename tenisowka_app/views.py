@@ -63,8 +63,8 @@ class MatchesMonthArchiveView(MonthArchiveView):
     queryset = Match.objects.all()
     date_field = 'date'
     allow_future = True
+    allow_empty = True
     month_format = '%m'
-    year_format = '%Y'
 
     def get_month(self):
         try:
