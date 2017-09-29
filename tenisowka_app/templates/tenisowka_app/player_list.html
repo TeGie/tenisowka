@@ -15,19 +15,19 @@
         <li>
             <h4>{{ player.name }}</h4>
             <div>
-            <a href="{% url 'player' player.id %}" class="btn btn-default btn-sm">
+            <a href="{% url 'player' player.id %}" class="btn btn-default btn-xs">
                 <span class="glyphicon glyphicon-eye-open"></span>
             </a>
             <form action="{% url 'update_player' player.id %}" style="display: inline;">
                 <input type="hidden" name="player_id" value="{{ player.id }}">
-                <button type="submit" class="btn btn-default btn-sm">
+                <button type="submit" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
             </form>
             <form action="{% url 'delete_player' player.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="player_id" value="{{ player.id }}">
-                <button type="submit" class="btn btn-default btn-sm confirm-delete">
+                <button type="submit" class="btn btn-default btn-xs confirm-delete">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </form>

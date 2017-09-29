@@ -3,13 +3,6 @@
 {% block title %}Pojedynki{% endblock title %}
 
 {% block content %}
-    <ul>
-        {% for match in match_list %}
-            <li>{{ match.date|date:"d / m / Y" }}: {{ match.player_1.name }} : {{ match.player_2.name }}
-                | {{ match.player_1_result }} : {{ match.player_2_result }}
-            </li>
-        {% endfor %}
-    </ul>
     <p>
         {% if previous_month %}
             Poprzedni miesiąc: <a href="{% url 'matches' previous_month|date:'Y' previous_month|date:'m' %}"> {{ previous_month|date:"m / Y" }}</a>
@@ -18,4 +11,11 @@
             Następny miesiąc: <a href="{% url 'matches' next_month|date:'Y' next_month|date:'m' %}"> {{ next_month|date:"m / Y" }}</a>
         {% endif %}
     </p>
+    <ul>
+        {% for match in match_list %}
+            <li>{{ match.date|date:"d / m / Y" }}: {{ match.player_1.name }} : {{ match.player_2.name }}
+                | {{ match.player_1_result }} : {{ match.player_2_result }}
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
