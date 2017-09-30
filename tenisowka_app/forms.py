@@ -1,4 +1,4 @@
-from .models import Match, Attendance
+from .models import Match
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 
@@ -15,9 +15,3 @@ class MatchForm(ModelForm):
         if player_1_result is not None and player_2_result is not None:
             if not (player_1_result != 3 and player_2_result == 3 or player_1_result == 3 and player_2_result != 3):
                 self.add_error(None, ValidationError('Wpisz poprawny wynik'))
-
-
-class AttendanceForm(ModelForm):
-    class Meta:
-        model = Attendance
-        fields = ['player', 'present']

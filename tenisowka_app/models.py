@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from dateutil.relativedelta import relativedelta
 from collections import Counter
+from django.urls import reverse
 
 
 __all__ = ('Player', 'Match', 'Event', 'Attendance')
@@ -78,8 +79,7 @@ class Match(models.Model):
     def __str__(self):
         return '{} - {} - {}'.format(self.player_1, self.player_2, self.date)
 
-
-    def save(self,*args,**kwargs):
+    def save(self, *args, **kwargs):
         try:
             player_1 = Player.objects.get(pk=self.player_1.pk)
             player_2 = Player.objects.get(pk=self.player_2.pk)
@@ -117,6 +117,9 @@ class Event(models.Model):
 
 
 class Attendance(models.Model):
-    player = models.ForeignKey(Player, verbose_name='Zawodnik')
+    players = models.ManyToManyField(Player, verbose_name='Zawodnik')
     event = models.ForeignKey(Event, verbose_name='Wydarzenie')
     present = models.BooleanField()
+
+    def get_absolute_url(self):
+        return reverse ('event', kwargs={'pk': self.event.pk})

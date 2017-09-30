@@ -13,6 +13,10 @@
     <p>{{ event.description }}</p>
     <p>{{ event.start }}</p>
     <p>{{ event.end }}</p>
+    <p>Obecni:</p>
+    {% for p in players %}
+        <p>{{ p }}</p>
+    {% endfor %}
     <form action="{% url 'update_event' event.id %}" style="display: inline;">
         <input type="hidden" name="event_id" value="{{ event.id }}">
         <button type="submit" class="btn btn-default btn-sm">

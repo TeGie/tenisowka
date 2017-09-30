@@ -49,7 +49,7 @@ urlpatterns = [
     # site nav
     url(r'^index/$', events, name='index'),
     url(r'^wydarzenie/(?P<pk>[0-9]+)/$', EventDetails.as_view(), name='event'),
-    url(r'^wydarzenie/dodaj/(?P<start>(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2})/$',
+    url(r'^wydarzenie/dodaj/(?P<date>(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2})/$',
         AddEvent.as_view(),
         name='add_event'),
     url(r'^wydarzenie/(?P<pk>[0-9]+)/aktualizuj/$', UpdateEvent.as_view(), name='update_event'),

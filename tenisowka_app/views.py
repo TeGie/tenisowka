@@ -107,6 +107,16 @@ class DeleteMatch(DeleteView):
 class EventDetails(DetailView):
     model = Event
 
+    def get_context_data(self, **kwargs):
+        context = super(EventDetails, self).get_context_data(**kwargs)
+        try:
+            attendance = Attendance.objects.get(event__id=self.kwargs['pk'])
+            players = attendance.players.all()
+            context['players'] = players
+        except Attendance.DoesNotExist:
+            pass
+        return context
+
 
 class AddEvent(CreateView):
     model = Event
@@ -115,8 +125,8 @@ class AddEvent(CreateView):
 
     def get_initial(self):
         return {
-            'start': self.kwargs['start'],
-            'end': self.kwargs['start']
+            'start': self.kwargs['date'],
+            'end': self.kwargs['date']
         }
 
 
@@ -139,8 +149,7 @@ class Attendances(ListView):
 
 class AddAttendance(CreateView):
     model = Attendance
-    success_url = reverse_lazy('attendances')
-    form_class = AttendanceForm
+    fields = ['players', 'present']
 
     def get_form_kwargs(self, **kwargs):
         kwargs = super(AddAttendance, self).get_form_kwargs(**kwargs)
