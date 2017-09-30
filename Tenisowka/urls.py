@@ -68,4 +68,7 @@ urlpatterns = [
     url(r'^pojedynek/(?P<pk>[0-9]+)/$', MatchDetails.as_view(), name='match'),
     url(r'^pojedynek/dodaj/$', AddMatch.as_view(), name='add_match'),
     url(r'^pojedynek/(?P<pk>[0-9]+)/aktualizuj/$', UpdateMatch.as_view(), name='update_match'),
+
+    url(r'^obecnosci/$', Attendances.as_view(), name='attendances'),
+    url(r'^obecnosci/(?P<pk>[0-9]+)/dodaj/$', AddAttendance.as_view(), name='add_attendance')
 ]

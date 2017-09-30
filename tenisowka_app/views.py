@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import *
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import json
 from django.views.generic.dates import MonthArchiveView
@@ -130,3 +130,22 @@ class UpdateEvent(UpdateView):
 class DeleteEvent(DeleteView):
     model = Event
     success_url = reverse_lazy('index')
+
+
+# Attendances
+class Attendances(ListView):
+    model = Attendance
+
+
+class AddAttendance(CreateView):
+    model = Attendance
+    success_url = reverse_lazy('attendances')
+    form_class = AttendanceForm
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(AddAttendance, self).get_form_kwargs(**kwargs)
+        if 'data' in kwargs:
+            event = Event.objects.get(pk=self.kwargs['pk'])
+            instance = Attendance(event=event)
+            kwargs.update({'instance': instance})
+        return kwargs

@@ -4,7 +4,7 @@ from dateutil.relativedelta import relativedelta
 from collections import Counter
 
 
-__all__ = ('Player', 'Match', 'Event')
+__all__ = ('Player', 'Match', 'Event', 'Attendance')
 
 
 class Player(models.Model):
@@ -114,3 +114,9 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Attendance(models.Model):
+    player = models.ForeignKey(Player, verbose_name='Zawodnik')
+    event = models.ForeignKey(Event, verbose_name='Wydarzenie')
+    present = models.BooleanField()
